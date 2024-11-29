@@ -341,6 +341,11 @@ void compileStatement(void) {
   }
 }
 
+void compileLValue(void) {
+  eat(TK_IDENT);
+  compileIndexes();
+}
+
 void compileAssignSt(void) {
   assert("Parsing an assign statement ....");
   // TODO
@@ -406,6 +411,10 @@ void compileForSt(void) {
   eat(KW_DO);
   compileStatement();
   assert("For statement parsed ....");
+}
+
+void compileArgument(void) {
+  compileExpression();
 }
 
 void compileArguments(void) {
