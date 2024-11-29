@@ -15,6 +15,10 @@
 Token *currentToken;
 Token *lookAhead;
 
+extern Type* intType;
+extern Type* charType;
+extern SymTab* symtab;
+
 void scan(void) {
   Token* tmp = currentToken;
   currentToken = lookAhead;
@@ -43,8 +47,14 @@ void compileBlock(void) {
   assert("Parsing a Block ....");
   if (lookAhead->tokenType == KW_CONST) {
     eat(KW_CONST);
-    compileConstDecl();
-    compileConstDecls();
+
+    do {
+      eat(TK_IDENT);
+      eat(SB_EQ);
+      compileConstant();
+      eat(SB_SEMICOLON);
+    } while (lookAhead->tokenType == TK_IDENT);
+
     compileBlock2();
   } 
   else compileBlock2();
@@ -54,8 +64,14 @@ void compileBlock(void) {
 void compileBlock2(void) {
   if (lookAhead->tokenType == KW_TYPE) {
     eat(KW_TYPE);
-    compileTypeDecl();
-    compileTypeDecls();
+
+    do {
+      eat(TK_IDENT);
+      eat(SB_EQ);
+      compileType();
+      eat(SB_SEMICOLON);
+    } while (lookAhead->tokenType == TK_IDENT);
+
     compileBlock3();
   } 
   else compileBlock3();
@@ -64,8 +80,14 @@ void compileBlock2(void) {
 void compileBlock3(void) {
   if (lookAhead->tokenType == KW_VAR) {
     eat(KW_VAR);
-    compileVarDecl();
-    compileVarDecls();
+
+    do {
+      eat(TK_IDENT);
+      eat(SB_COLON);
+      compileType();
+      eat(SB_SEMICOLON);
+    } while (lookAhead->tokenType == TK_IDENT);
+
     compileBlock4();
   } 
   else compileBlock4();
@@ -270,6 +292,18 @@ void compileParams(void) {
     eat(SB_RPAR);
   }
   
+}
+
+void compileParams(void) {
+  if (lookAhead->tokenType == SB_LPAR) {
+    eat(SB_LPAR);
+    compileParam();
+    while (lookAhead->tokenType == SB_SEMICOLON) {
+      eat(SB_SEMICOLON);
+      compileParam();
+    }
+    eat(SB_RPAR);
+  }
 }
 
 void compileParams2(void) {
@@ -640,7 +674,13 @@ int compile(char *fileName) {
   currentToken = NULL;
   lookAhead = getValidToken();
 
+  initSymTab();
+
   compileProgram();
+
+  printObject(symtab->program,0);
+
+  cleanSymTab();
 
   free(currentToken);
   free(lookAhead);
