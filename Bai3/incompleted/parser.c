@@ -294,17 +294,17 @@ void compileParams(void) {
   
 }
 
-void compileParams(void) {
-  if (lookAhead->tokenType == SB_LPAR) {
-    eat(SB_LPAR);
-    compileParam();
-    while (lookAhead->tokenType == SB_SEMICOLON) {
-      eat(SB_SEMICOLON);
-      compileParam();
-    }
-    eat(SB_RPAR);
-  }
-}
+// void compileParams(void) {
+//   if (lookAhead->tokenType == SB_LPAR) {
+//     eat(SB_LPAR);
+//     compileParam();
+//     while (lookAhead->tokenType == SB_SEMICOLON) {
+//       eat(SB_SEMICOLON);
+//       compileParam();
+//     }
+//     eat(SB_RPAR);
+//   }
+// }
 
 void compileParams2(void) {
   // TODO
