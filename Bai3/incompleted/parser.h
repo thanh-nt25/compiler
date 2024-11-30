@@ -6,7 +6,6 @@
 #ifndef __PARSER_H__
 #define __PARSER_H__
 #include "token.h"
-#include "debug.h"
 
 void scan(void);
 void eat(TokenType tokenType);
@@ -26,14 +25,11 @@ void compileVarDecl(void);
 void compileSubDecls(void);
 void compileFuncDecl(void);
 void compileProcDecl(void);
-// void compileUnsignedConstant(void);
-// void compileConstant(void);
-// void compileConstant2(void);
-ConstantValue* compileUnsignedConstant(void);
-ConstantValue* compileConstant(void);
-ConstantValue* compileConstant2(void);
-Type* compileType(void);
-Type* compileBasicType(void);
+void compileUnsignedConstant(void);
+void compileConstant(void);
+void compileConstant2(void);
+void compileType(void);
+void compileBasicType(void);
 void compileParams(void);
 void compileParams2(void);
 void compileParam(void);
@@ -58,7 +54,6 @@ void compileTerm(void);
 void compileTerm2(void);
 void compileFactor(void);
 void compileIndexes(void);
-
 
 int compile(char *fileName);
 
