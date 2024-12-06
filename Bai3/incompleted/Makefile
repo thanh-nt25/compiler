@@ -29,5 +29,6 @@ error.o: error.c
 	${CC} ${CFLAGS} error.c
 
 clean:
-	rm -f *.o *~
+	rm *.o
+	rm .\parser.exe
 

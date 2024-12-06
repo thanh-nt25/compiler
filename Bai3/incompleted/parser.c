@@ -500,57 +500,50 @@ void compileArguments2(void)
   {
   case SB_COMMA:
     eat(SB_COMMA);
+    if (lookAhead->tokenType == SB_RPAR) {
+      
+      error(ERR_INVALIDARGUMENTS, lookAhead->lineNo, lookAhead->colNo);
+    }
     compileExpression();
     compileArguments2();
     break;
   case SB_RPAR:
     break;
-  // Error:
   default:
     error(ERR_INVALIDARGUMENTS, lookAhead->lineNo, lookAhead->colNo);
     break;
   }
 }
 
-void compileCondition(void)
-{
+void compileCondition(void) {
   compileExpression();
-  compileCondition2();
-}
-
-void compileCondition2(void)
-{
-  switch (lookAhead->tokenType)
-  {
+  switch (lookAhead->tokenType) {
   case SB_EQ:
     eat(SB_EQ);
-    compileExpression();
     break;
   case SB_NEQ:
     eat(SB_NEQ);
-    compileExpression();
     break;
   case SB_LE:
     eat(SB_LE);
-    compileExpression();
     break;
   case SB_LT:
     eat(SB_LT);
-    compileExpression();
     break;
   case SB_GE:
     eat(SB_GE);
-    compileExpression();
     break;
   case SB_GT:
     eat(SB_GT);
-    compileExpression();
     break;
   default:
     error(ERR_INVALIDCOMPARATOR, lookAhead->lineNo, lookAhead->colNo);
-    break;
   }
+
+  compileExpression();
 }
+
+
 
 void compileExpression(void)
 {
