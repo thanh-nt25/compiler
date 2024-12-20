@@ -1,0 +1,25 @@
+0:  J 1         Jump dòng 1
+1:  INT 5       Init stack
+
+2:  LA 0,4      
+3:  LC 1
+4:  ST          N := 1
+
+5:  WLN         WriteLn
+6:  LV 0,4      
+7:  WRI         WriteI(N)
+
+8:  LA 0,4      
+9:  LV 0,4
+10:  LC 1
+11:  AD 
+12:  ST         N := N + 1
+
+13:  LV 0,4
+14:  LC 10
+15:  GT         N > 10
+
+16:  FJ 18
+17:  J 5
+
+18:  HL         End;

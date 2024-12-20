@@ -1,0 +1,15 @@
+Program Example2; (* REPEAT UNTIL statement *)
+
+Var n : Integer;
+
+Begin
+    n := 1;
+
+    REPEAT
+        Begin
+            Call WriteLn;
+            Call WriteI(n);
+            n := n + 1;
+        End
+    UNTIL n > 10;
+End. (* REPEAT UNTIL statement *)

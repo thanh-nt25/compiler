@@ -38,5 +38,6 @@ debug.o: debug.c
 	${CC} ${CFLAGS} debug.c
 
 clean:
-	rm -f *.o *~
+	rm *.o
+	rm ./kplc.exe
 

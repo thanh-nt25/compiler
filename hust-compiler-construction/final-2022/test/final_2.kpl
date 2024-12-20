@@ -1,0 +1,25 @@
+Program Example2; (* REPEAT UNTIL statement *)
+
+Var n : Integer;
+    i : Integer;
+    res : Integer;
+
+Begin
+    n := ReadI;
+    
+    If n > 0 Then
+      Begin
+        i := 0;
+        res := 1;
+
+        REPEAT
+            Begin
+                res := res * 2;
+                i := i + 1;
+            End
+        UNTIL i > n;
+
+        call writeLn;
+        call writeI(res);
+      End;
+End. (* REPEAT UNTIL statement *)
